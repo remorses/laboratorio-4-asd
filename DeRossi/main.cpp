@@ -63,11 +63,11 @@ bool calcola(queue::Queue codaToken, int &risultato) {
         tk = queue::dequeue(codaToken);
         if (tk.k == PARENTESI_CHIUSA){
             tk = stack::pop(s);
-            if (tk.k != NUMERO) return false;
+            if (tk.k != NUMERO) return 0;
             int a = str2int(tk.val);
             tk = stack::pop(s);
             tk2 = stack::pop(s);
-            if (tk2.k != NUMERO){ return false; }
+            if (tk2.k != NUMERO){ return 0; }
             switch( tk.k ){
                 case OP_SOMMA:{
                     a = a + str2int(tk2.val);
@@ -81,9 +81,9 @@ bool calcola(queue::Queue codaToken, int &risultato) {
                     a = a * str2int(tk2.val);
                     break;
                 }
-                default: { return false; }
+                default: { return 0; }
             }
-            if(stack::pop(s).k != PARENTESI_APERTA){ return false; }
+            if(stack::pop(s).k != PARENTESI_APERTA){ return 0; }
             tk.val = int2str(a);
             tk.k = NUMERO;
             stack::push(tk,s);
