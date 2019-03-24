@@ -51,24 +51,24 @@ bool leggi( const string &str, queue::Queue &codaToken) {
 // un ")", un numero, un operatore aritmetico, un altro
 // numero, e un "("; se non è così, allora si segnala
 // errore sintattico e l'algoritmo termina.
-// A questo punto la funzione deve convertire i token di tipo NUMERO in numeri interi, 
+// A questo punto la funzione deve convertire i token di tipo NUMERO in numeri interi,
 // eseguire l'operazione aritmetica opportuna, e trasformare il risultato da numero a
 // token e inserire quest'ultimo sullo stack.
 // Alla fine se non ci sono errori sintattici la funzione deve mettere nella variabile
 // risultato il vaore dell'espressione
 bool calcola(queue::Queue codaToken, int &risultato) {
-    token tk, tk2;
+    token tk1, tk2;
     stack::Stack s = stack::EMPTYSTACK;
     while (!queue::isEmpty(codaToken)){
-        tk = queue::dequeue(codaToken);
-        if (tk.k == PARENTESI_CHIUSA){
-            tk = stack::pop(s);
-            if (tk.k != NUMERO) return 0;
-            int a = str2int(tk.val);
-            tk = stack::pop(s);
+        tk1 = queue::dequeue(codaToken);
+        if (tk1.k == PARENTESI_CHIUSA){
+            tk1 = stack::pop(s);
+            if (tk1.k != NUMERO) return 0;
+            int a = str2int(tk1.val);
+            tk1 = stack::pop(s);
             tk2 = stack::pop(s);
             if (tk2.k != NUMERO){ return 0; }
-            switch( tk.k ){
+            switch( tk1.k ){
                 case OP_SOMMA:{
                     a = a + str2int(tk2.val);
                     break;
@@ -84,15 +84,17 @@ bool calcola(queue::Queue codaToken, int &risultato) {
                 default: { return 0; }
             }
             if(stack::pop(s).k != PARENTESI_APERTA){ return 0; }
-            tk.val = int2str(a);
-            tk.k = NUMERO;
-            stack::push(tk,s);
-        }else{ stack::push(tk, s); }
+            tk1.val = int2str(a);
+            tk1.k = NUMERO;
+            stack::push(tk1,s);
+        } else { stack::push(tk1, s); }
     }
-    tk = stack::pop(s);
-    risultato = str2int(tk.val);
+    tk1 = stack::pop(s);
+    risultato = str2int(tk1.val);
     return stack::isEmpty(s);
 }
+
+
 
 /////////////////////////////////////////////////////////////////////
 //                               MAIN

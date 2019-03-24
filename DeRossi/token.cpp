@@ -53,6 +53,7 @@ bool prossimoToken(string &s, token &t){
     if(s.length() == 0){
         return false;
     }
+    
     istringstream iss(s);
     iss >> t.val;
     if(t.val[0] >= '0' && t.val[0] <= '9'){
