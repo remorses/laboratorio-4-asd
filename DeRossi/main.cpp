@@ -28,6 +28,11 @@ using std::ostringstream;
 // Funzioni principali: leggi() e calcola()
 /////////////////////////////////////////////////////////////////////
 
+queue::Queue copy_queue(queue::Queue q) {
+    queueue::Queue copy;
+    
+
+
 bool sintatticamente_corretto(queue::Queue q) {
     int open_count = 0;
     int closed_count = 0;
@@ -40,7 +45,7 @@ bool sintatticamente_corretto(queue::Queue q) {
             closed_count += 1;
         }
     }
-    cout << open_count << " and " << closed_count << std::endl;
+    cout << open_count << " and " << closed_count << std::endl << std::endl;
     if (open_count != closed_count) {
         return false;
     }
@@ -58,15 +63,24 @@ bool leggi( const string &str, queue::Queue &coda) {
     token tk;
     string strm = str;
     int insertToken = 0;
+    int open_count = 0;
+    int closed_count = 0;
     coda = queue::EMPTYQUEUE;
     while(prossimoToken(strm, tk)){
         if(tk.k == SCONOSCIUTO){
             return false;
         }
+        if (tk.k == PARENTESI_APERTA) {
+            open_count += 1;
+        }
+        if (tk.k == PARENTESI_CHIUSA) {
+            closed_count += 1;
+        }
         insertToken++;
         queue::enqueue(tk, coda);
     }
-    return  sintatticamente_corretto(coda) && insertToken >= 5;
+    cout << open_count << " and " << closed_count << std::endl << std::endl;
+    return insertToken >= 5;
 }
 
 // Estrae uno dopo l'altro i token dalla coda, inserendoli via via sullo stack.
