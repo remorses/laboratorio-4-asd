@@ -64,6 +64,7 @@ bool leggi( const string &str, queue::Queue &coda) {
     int closed_count = 0;
     coda = queue::EMPTYQUEUE;
     while(prossimoToken(strm, tk)){
+        cout << tk.k << std::endl;
         if(tk.k == SCONOSCIUTO){
             return false;
         }
