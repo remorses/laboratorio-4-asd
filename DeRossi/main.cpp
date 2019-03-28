@@ -32,7 +32,7 @@ bool sintatticamente_corretto(queue::Queue q) {
     int open_count = 0;
     int closed_count = 0;
     while (!queue::isEmpty(q)) {
-        queue::Elem tk = q.dequeue();
+        queue::Elem tk = queue::dequeue(q);
         if (tk.k == PARENTESI_APERTA) {
             open_count += 1;
         }
