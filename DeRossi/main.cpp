@@ -77,6 +77,12 @@ bool leggi( const string &str, queue::Queue &coda) {
         queue::enqueue(tk, coda);
     }
     cout << open_count << " and " << closed_count << std::endl << std::endl;
+    if (open_count != closed_count) {
+        return false;
+    }
+    if (open_count == 0 || closed_count == 0) {
+        return false;
+    }
     return insertToken >= 5;
 }
 
