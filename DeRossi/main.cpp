@@ -28,9 +28,6 @@ using std::ostringstream;
 // Funzioni principali: leggi() e calcola()
 /////////////////////////////////////////////////////////////////////
 
-queue::Queue copy_queue(queue::Queue q) {
-    queueue::Queue copy;
-    
 
 
 bool sintatticamente_corretto(queue::Queue q) {
