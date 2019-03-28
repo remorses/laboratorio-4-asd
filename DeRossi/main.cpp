@@ -32,7 +32,7 @@ bool sintatticamente_corretto(queue::Queue q) {
     int open_count = 0;
     int closed_count = 0;
     while (!queue::isEmpty(q)) {
-        queue::Elem tk = queue::dequeue(q);
+        token tk = queue::dequeue(q);
         if (tk.k == PARENTESI_APERTA) {
             open_count += 1;
         }
@@ -66,7 +66,7 @@ bool leggi( const string &str, queue::Queue &coda) {
         insertToken++;
         queue::enqueue(tk, coda);
     }
-    return  insertToken >= 5;
+    return  sintatticamente_corretto(coda) && insertToken >= 5;
 }
 
 // Estrae uno dopo l'altro i token dalla coda, inserendoli via via sullo stack.
