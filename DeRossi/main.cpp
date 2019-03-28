@@ -40,12 +40,14 @@ bool sintatticamente_corretto(queue::Queue q) {
             closed_count += 1;
         }
     }
+    cout << open_count << " and " << closed_count << "\n";
     if (open_count != closed_count) {
         return false;
     }
     if (open_count == 0 || closed_count == 0) {
         return false;
     }
+
     return true;
 }
         
@@ -58,10 +60,10 @@ bool leggi( const string &str, queue::Queue &coda) {
     int insertToken = 0;
     coda = queue::EMPTYQUEUE;
     while(prossimoToken(strm, tk)){
-        insertToken++;
         if(tk.k == SCONOSCIUTO){
             return false;
         }
+        insertToken++;
         queue::enqueue(tk, coda);
     }
     return sintatticamente_corretto(coda) && insertToken >= 5;
