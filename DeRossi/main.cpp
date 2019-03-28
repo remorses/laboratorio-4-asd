@@ -40,7 +40,7 @@ bool sintatticamente_corretto(queue::Queue q) {
             closed_count += 1;
         }
     }
-    cout << open_count << " and " << closed_count << "\n";
+    cout << open_count << " and " << closed_count << std::endl;
     if (open_count != closed_count) {
         return false;
     }
@@ -66,7 +66,7 @@ bool leggi( const string &str, queue::Queue &coda) {
         insertToken++;
         queue::enqueue(tk, coda);
     }
-    return sintatticamente_corretto(coda) && insertToken >= 5;
+    return  insertToken >= 5;
 }
 
 // Estrae uno dopo l'altro i token dalla coda, inserendoli via via sullo stack.
