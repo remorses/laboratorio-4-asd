@@ -31,16 +31,13 @@ using std::ostringstream;
 bool sintatticamente_corretto(queue::Queue q) {
     int open_count = 0;
     int closed_count = 0;
-    while (true) {
+    while (!queue::isEmpty(q)) {
         token tk = q.dequeue();
         if (tk.k == PARENTESI_APERTA) {
             open_count += 1;
         }
         if (tk.k == PARENTESI_CHIUSA) {
             closed_count += 1;
-        }
-        if (tk.k == SCONOSCIUTO) {
-            break;
         }
     }
     if (open_count != closed_count) {
@@ -55,7 +52,7 @@ bool sintatticamente_corretto(queue::Queue q) {
         
 
 // Estrae uno dopo l'altro i token dalla stringa "str", inserendoli via via nella coda "codaToken"
-bool leggi( const string &str, queue::Queue &codaToken) {
+bool leggi( const string &str, queue::Queue &coda) {
     token tk;
     string strm = str;
     int insertToken = 0;
