@@ -41,6 +41,7 @@ bool leggi( const string &str, queue::Queue &codaToken) {
     if(tk.k == SCONOSCIUTO){
         return false;
     }
+    if (tk.k )
     return insertToken >= 5;
 }
 
@@ -63,34 +64,35 @@ bool calcola(queue::Queue codaToken, int &risultato) {
         tk1 = queue::dequeue(codaToken);
         if (tk1.k == PARENTESI_CHIUSA){
             tk1 = stack::pop(s);
-            if (tk1.k != NUMERO) return 0;
-            int a = str2int(tk1.val);
-            tk1 = stack::pop(s);
-            tk2 = stack::pop(s);
+            if (tk1.k != NUMERO) return 0;  //se token dopo la parentesi non e' un numero
+            int a = str2int(tk1.val);       //trasforma token (primo numero) in int
+            tk1 = stack::pop(s);            //tk1 = operazione
+            tk2 = stack::pop(s);            //tk2 = secondo numero
+            int b = str2int(tk2.val);       //trasforma token (secondo numero) in int
             if (tk2.k != NUMERO){ return 0; }
             switch( tk1.k ){
                 case OP_SOMMA:{
-                    a = a + str2int(tk2.val);
+                    a = a + b;
                     break;
                 }
                 case OP_SOTTRAZIONE:{
-                    a = str2int(tk2.val) - a;
+                    a = b - a;
                     break;
                 }
                 case OP_MOLTIPLICAZIONE:{
-                    a = a * str2int(tk2.val);
+                    a = a * b;
                     break;
                 }
                 default: { return 0; }
             }
             if(stack::pop(s).k != PARENTESI_APERTA){ return 0; }
-            tk1.val = int2str(a);
+            tk1.val = int2str(a);       //trasforma risultato da int a token
             tk1.k = NUMERO;
-            stack::push(tk1,s);
-        } else { stack::push(tk1, s); }
+            stack::push(tk1,s);         //ex. sostituisci ( 4 + 6 ) con 10 
+        } else { stack::push(tk1, s); } //se non e' non una parentesi chiusa, si suppone che sia un numero?
     }
-    tk1 = stack::pop(s);
-    risultato = str2int(tk1.val);
+    tk1 = stack::pop(s);            //pop dell'ultima parentesi?
+    risultato = str2int(tk1.val); //risultato finale
     return stack::isEmpty(s);
 }
 
